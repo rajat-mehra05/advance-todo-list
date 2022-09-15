@@ -71,26 +71,34 @@ const TodoList = () => {
           type="text"
           name="input"
           id="input"
-          className="border-2 border-slate-800 p-2"
+          className="border-2 border-slate-800 p-2 w-80 text-gray-700"
           placeholder="Enter your tasks"
         />
       </form>
-      <div className="todoContainer">
-        <ul className="flex gap-4 flex-wrap justify-center py-4">
-          {allTodos.map((todo) => (
-            <li key={todo.id}>
-              <TodoCard
-                content={todo}
-                allTodos={allTodos}
-                setAllTodos={setAllTodos}
-                setInputVal={setInputVal}
-                editId={editId}
-                setEditId={setEditId}
-                handleTaskComplete={handleTaskComplete}
-              />
-            </li>
-          ))}
-        </ul>
+      <div className="flex justify-center">
+        {allTodos.length === 0 ? (
+          <h1 className="text-2xl font-semibold py-6 text-slate-800 px-2">
+            You don't have any todos yet. Create a one.
+          </h1>
+        ) : (
+          <>
+            <ul className="flex gap-4 flex-wrap justify-center py-4">
+              {allTodos.map((todo) => (
+                <li key={todo.id}>
+                  <TodoCard
+                    content={todo}
+                    allTodos={allTodos}
+                    setAllTodos={setAllTodos}
+                    setInputVal={setInputVal}
+                    editId={editId}
+                    setEditId={setEditId}
+                    handleTaskComplete={handleTaskComplete}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </div>
   );

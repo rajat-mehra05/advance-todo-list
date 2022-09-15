@@ -24,7 +24,7 @@ const TodoCard = ({
 
   return (
     <div
-      className={`bg-gradient-to-r from-emerald-700 to-green-400 text-white w-60 py-4 px-2 space-y-4`}
+      className={`bg-gradient-to-r from-emerald-700 to-green-400 text-white w-60 sm:w-80 py-4 px-2 space-y-4`}
     >
       <div>
         <h1
