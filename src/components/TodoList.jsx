@@ -39,7 +39,7 @@ const TodoList = () => {
 
     if (!inputVal) alert("Please add input");
     else {
-      setAllTodos([...allTodos, { id: `${inputVal}-${Date.now()}`, inputVal }]);
+      setAllTodos([{ id: `${inputVal}-${Date.now()}`, inputVal }, ...allTodos]);
       setInputVal("");
     }
   }
@@ -58,11 +58,11 @@ const TodoList = () => {
       isCompleted: true,
     };
 
-    setAllTodos(completedTodos);
+    setAllTodos([...completedTodos]);
   }
 
   return (
-    <div className="flex flex-col justify-center space-y-4 items-center py-4">
+    <div className="flex flex-col justify-center space-y-4 items-center py-10">
       <Hero />
       <form onSubmit={handleSubmit}>
         <input
@@ -71,31 +71,36 @@ const TodoList = () => {
           type="text"
           name="input"
           id="input"
-          className="border-2 border-slate-800 p-2 w-80 text-gray-700"
+          className=" p-2 w-80 text-gray-700 rounded-lg"
           placeholder="Enter your tasks"
         />
       </form>
-      <div className="flex justify-center">
+      <div className="flex">
         {allTodos.length === 0 ? (
           <h1 className="text-2xl font-semibold py-6 text-slate-800 px-2">
             You don't have any todos yet. Create a one.
           </h1>
         ) : (
           <>
-            <ul className="flex gap-4 flex-wrap justify-center py-4">
-              {allTodos.map((todo) => (
-                <li key={todo.id}>
-                  <TodoCard
-                    content={todo}
-                    allTodos={allTodos}
-                    setAllTodos={setAllTodos}
-                    setInputVal={setInputVal}
-                    editId={editId}
-                    setEditId={setEditId}
-                    handleTaskComplete={handleTaskComplete}
-                  />
-                </li>
-              ))}
+            <ul className="flex gap-4 flex-col justify-center py-4">
+              {allTodos
+                .sort((a, b) =>
+                  a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1
+                )
+                .map((todo) => (
+                  <li key={todo.id}>
+                    <TodoCard
+                      content={todo}
+                      allTodos={allTodos}
+                      setAllTodos={setAllTodos}
+                      setInputVal={setInputVal}
+                      editId={editId}
+                      setEditId={setEditId}
+                      handleTaskComplete={handleTaskComplete}
+                      isCompleted={todo.isCompleted}
+                    />
+                  </li>
+                ))}
             </ul>
           </>
         )}

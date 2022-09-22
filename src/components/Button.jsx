@@ -1,9 +1,9 @@
 import React from "react";
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, className, ...props }) => {
   return (
     <button
-      className={` bg-white p-2 text-white rounded-lg hover:bg-slate-200`}
+      className={` ${className} bg-white p-2 text-white rounded-lg hover:bg-slate-200`}
       {...props}
     >
       {children}

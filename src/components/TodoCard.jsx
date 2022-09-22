@@ -8,6 +8,7 @@ const TodoCard = ({
   setInputVal,
   setEditId,
   handleTaskComplete,
+  isCompleted,
 }) => {
   const { id, inputVal } = content;
 
@@ -24,7 +25,7 @@ const TodoCard = ({
 
   return (
     <div
-      className={`bg-gradient-to-r from-emerald-700 to-green-400 text-white w-60 sm:w-80 py-4 px-2 space-y-4`}
+      className={` rounded-lg bg-gradient-to-r from-emerald-700 to-green-400 text-white w-60 sm:w-80 py-4 px-2 space-y-4`}
     >
       <div>
         <h1
@@ -38,7 +39,12 @@ const TodoCard = ({
       <div className="flex flex-wrap gap-4 justify-end">
         <Button onClick={() => handleEdit(id)}> ✏️ </Button>
         <Button onClick={() => handleDelete(id)}> ❌ </Button>
-        <Button onClick={() => handleTaskComplete(id)}> ✔️ </Button>
+        <Button
+          className="text-gray-600"
+          onClick={() => handleTaskComplete(id)}
+        >
+          {isCompleted ? "Completed ✔️" : "Mark Complete"}
+        </Button>
       </div>
     </div>
   );
