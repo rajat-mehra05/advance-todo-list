@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 
 const Links = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -19,11 +18,13 @@ const Links = () => {
       <ul className="list-none flex gap-4">
         {linksObj.map((navLink) => (
           <li key={navLink.id}>
-            <NavLink
+            <a
               onMouseEnter={() => setHoveredIndex(navLink.id)}
               onMouseLeave={() => setHoveredIndex(null)}
-              to={navLink.link}
+              href={navLink.link}
+              target="_blank"
               className="relative rounded-xl px-6 py-2 text-sm text-green-700 transition-all delay-150 hover:text-green-900"
+              rel="noreferrer"
             >
               <AnimatePresence>
                 {hoveredIndex === navLink.id && (
@@ -42,7 +43,7 @@ const Links = () => {
               <span className="relative z-10 font-semibold text-xl">
                 {navLink.name}
               </span>
-            </NavLink>
+            </a>
           </li>
         ))}
       </ul>

@@ -9,6 +9,7 @@ const TodoCard = ({
   setEditId,
   handleTaskComplete,
   isCompleted,
+  inputRef,
 }) => {
   const { id, inputVal } = content;
 
@@ -21,6 +22,7 @@ const TodoCard = ({
     let editTodos = allTodos.find((item) => item.id === id);
     setInputVal([editTodos.inputVal]);
     setEditId(id);
+    inputRef.current.focus();
   }
 
   return (
@@ -31,7 +33,7 @@ const TodoCard = ({
         <h1
           className={`${
             content.isCompleted ? "line-through" : ""
-          } text-white font-semibold`}
+          } text-white font-semibold text-xl`}
         >
           {inputVal}
         </h1>
@@ -40,7 +42,7 @@ const TodoCard = ({
         <Button onClick={() => handleEdit(id)}> ✏️ </Button>
         <Button onClick={() => handleDelete(id)}> ❌ </Button>
         <Button
-          className="text-gray-600"
+          className="text-gray-700"
           onClick={() => handleTaskComplete(id)}
         >
           {isCompleted ? "Completed ✔️" : "Mark Complete"}

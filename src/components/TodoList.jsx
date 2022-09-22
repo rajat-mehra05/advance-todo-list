@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Hero from "./Hero";
 import TodoCard from "./TodoCard";
 
 const TodoList = () => {
   const [inputVal, setInputVal] = useState("");
   const [editId, setEditId] = useState(0);
+  const inputRef = useRef(null);
+
   const [allTodos, setAllTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
 
@@ -41,6 +43,7 @@ const TodoList = () => {
     else {
       setAllTodos([{ id: `${inputVal}-${Date.now()}`, inputVal }, ...allTodos]);
       setInputVal("");
+      inputRef.current.focus();
     }
   }
 
@@ -66,6 +69,7 @@ const TodoList = () => {
       <Hero />
       <form onSubmit={handleSubmit}>
         <input
+          ref={inputRef}
           value={inputVal}
           onChange={handleInput}
           type="text"
@@ -95,6 +99,7 @@ const TodoList = () => {
                       setAllTodos={setAllTodos}
                       setInputVal={setInputVal}
                       editId={editId}
+                      inputRef={inputRef}
                       setEditId={setEditId}
                       handleTaskComplete={handleTaskComplete}
                       isCompleted={todo.isCompleted}
